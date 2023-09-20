@@ -1,5 +1,5 @@
-# fitnessClub
-This is a fitness C.
+# Fitness Club
+This is a Fitness Club.
 
 ## How to run the web app
 1.	Either fork or download the app and open the folder in the cli
