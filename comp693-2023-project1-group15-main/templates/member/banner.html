@@ -1,0 +1,32 @@
+<!-- Banner for reminders -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card bg-dark text-white">
+          <img src="banner-image.jpg" class="card-img" alt="Banner Image">
+          <div class="card-img-overlay">
+            <h5 class="card-title">Welcome!</h5>
+            {% if message %}
+            <p class="card-text">{{message}}</p>
+              {% if paymentpage %}
+              <form action="/member/reminder" method="POST">
+                <input type="hidden" value="{{user_id}}" name="user_id">
+                <button type="Submit" name="paynow-reminder">Make a payment now</button>
+              </form>
+              {% endif %}
+              {% if cancelautopay %}
+              <form action="/member/reminder" method="POST">
+                <input type="hidden" value="{{user_id}}" name="user_id">
+                <button type="Submit" name="acknowledge">Understand</button>
+                <button type="Submit" name="cancel-autopay" onclick="return confirm('Are you sure you want to cancel your auto-payment?')">Cancel your autopayment</button>
+              </form>
+              {% endif %}
+            {% else %}
+            <p></p>
+            {% endif %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

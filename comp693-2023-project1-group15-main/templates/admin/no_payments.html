@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+    <h1>Pending Payments</h1>
+    <p>There are no pending payments at the moment.</p>
+</main>
+{% endblock %}

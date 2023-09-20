@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+
+    <main>
+        <div>
+            
+            <h2>Booked Exercise Class</h2>
+          
+
+            <table class="table table-striped table-hover table-bordered">
+                <tr><th>Trainer Name</th><th>Class Name</th><th>Class Description</th><th>Room</th><th>Time</th><th>Date</th><th>Cancel Booking</th></tr>
+                
+                {% for entry in exercise_Data %}
+                    <tr>
+                        <td>{{entry[0]+' '+entry[1]}}</td>
+                        <td>{{entry[2]}}</td>
+                        <td>{{entry[3]}}</td>
+                        <td>{{entry[4]}}</td>
+                        <td>{{entry[5]}}</td>
+                        <td>{{entry[6]}}</td>
+                        <form action="/cancel/booking"  method="post">
+                            <td><button type="submit" class="btn btn-primary" id="bookId" name="bookId" value="{{entry[7]}}">cancel</button></td>
+                            <input type="hidden" id="userID" name="userID" value={{user_iD}}>
+                        </form>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+
+
+            <h2>Booked Special training</h2>
+          
+
+            <table class="table table-striped table-hover table-bordered">
+                <tr><th>Trainer Name</th><th>Class Rate</th><th>Class Time</th><th>Date</th><th>Cancel Booking</th></tr>
+                
+                {% for entry in sepcial_Training %}
+                    <tr>
+                        <td>{{entry[0]+' '+entry[1]}}</td>
+                        <td>{{entry[2]}}</td>
+                        <td>{{entry[3]}}</td>
+                        <td>{{entry[4]}}</td>
+                        <form action="/cancel/booking"  method="post">
+                            <td><button type="submit" class="btn btn-primary" id="bookId" name="bookId" value="{{entry[5]}}">cancel</button></td>
+                            <input type="hidden" id="userID" name="userID" value={{user_iD}}>
+                        </form>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+
+
+
+
+
+
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+{% endblock %}

@@ -1,0 +1,193 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-right: 3px;
+}
+
+/* Horizontal navbar */
+.nav-header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+
+.info {
+  width: 150px;
+  height: 50px;
+  float: right;
+  background-color: lightblue;
+}
+
+.info :hover {
+  color: white;
+}
+
+.fa-circle-user {
+  font-size: 2.5rem;
+  padding-right: 10px;
+}
+
+.nav-horizontal {
+  width: 100%;
+  background-color: rgb(224, 219, 219);
+  border: none;
+}
+
+.nav-text {
+  float: left;
+  margin: 0 0 0 210px;
+  height: 100%;
+  font-size: 2rem;
+  line-height: 50px;
+}
+
+.dropdown button {
+  width: 150px;
+  height: 50px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  width: 130px;
+}
+
+.dropdown-menu i{
+padding-right:10px;
+}
+
+
+/* Vertical navbar */
+.ver-image {
+  display: flex;
+  height: 100px;
+  width: 200px;
+  padding: 20px 30px;
+  text-align: center;
+  background-color: #085394;
+}
+
+.ver-image i {
+  color: white;
+  font-size: 4rem;
+  padding: 10px 10px 10px 0;
+}
+
+.admin-name {
+  line-height: 80%;
+  margin-top: 12px;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.admin-role {
+  color: lightgreen;
+}
+
+.nav-vertical {
+  background-color: lightblue;
+  position: fixed;
+  height: 100%;
+  border: none;
+}
+
+.nav-vertical ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navbar-inverse .navbar-nav li a {
+  color: rgb(84, 82, 82);
+}
+
+.nav-vertical li {
+  padding: 5px 0;
+  font-size: 1.5rem;
+}
+
+.nav-vertical li i {
+  padding: 0 10px;
+}
+
+.nav-vertical .navbar-nav .nav-active {
+  color: #085394;
+  font-weight: bold;
+}
+
+/* Main session */
+main {
+  margin-left: 210px;
+}
+.error_msg{
+color:red
+}
+
+
+
+
+/* footer session */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Login Page*/
+.login-form-layout {
+padding-top:10%;
+  line-height: 2;
+}
+
+.login-form-layout h2 {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.login-row {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+
+@media (max-width:660px) {
+
+  .nav-text,
+  .navbar-nav li span,
+  .ver-image {
+    display: none;
+  }
+
+  .nav-vertical {
+    width: 50px;
+  }
+
+  .nav-vertical ul {
+    text-align: center;
+  }
+
+  main,
+  footer {
+    margin-left: 60px;
+  }
+
+.login-row {
+    display: block;
+  }
+}
+
+.update-button.activate {
+    background-color: green;
+}
+
+.update-button.deactivate {
+    background-color: red;
+}

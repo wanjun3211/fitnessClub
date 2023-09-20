@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+    <h1>Pending Payments</h1>
+
+    {% if payment_details %}
+        <form method="post" id="payment-form">
+            {% for payment in payment_details %}
+                <div>
+                    <input type="radio" id="payment_id-{{ payment.payment_id }}" name="payment_status" value="{{ payment.payment_id }}">
+                    <label for="payment_id-{{ payment.payment_id }}">Mark as paid</label>
+                    <span> {{ payment.member_name }} paid ${{ payment.amount }} on {{ payment.date }}</span>
+                </div>
+            {% endfor %}
+            <button type="submit" id="submit-payment">Save</button>
+        </form>
+    {% else %}
+        <p>There are no pending payments at the moment.</p>
+    {% endif %}
+</main>
+
+<script>
+    // Intercept the form submission event
+    document.querySelector('#payment-form').addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the selected payment_id value
+        var paymentId = document.querySelector('input[name="payment_status"]:checked').value;
+
+        // Create a Fetch request to submit the payment_id value
+        fetch('/submit_payment_id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ payment_id: paymentId })
+        })
+        .then(function(response) {
+            if (response.ok) {
+                alert('Payment ID submitted successfully!');
+                location.reload();  // Refresh the page
+            } else {
+                alert('Error submitting payment ID:' + paymentId);
+            }
+        })
+        .catch(function(error) {
+            alert('Error submitting payment ID:' + paymentId);
+        });
+    });
+</script>
+
+{% endblock %}

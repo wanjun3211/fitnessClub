@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+
+  <h1>View Trainee's Information</h1>
+
+    <a href="/trainer/viewtrainee?history_info=0" {% if history_info_display=='1' %} class="btn btn-link" {% else %} class="btn btn-info" {% endif %}  >Future Info</a>
+    <a href="/trainer/viewtrainee?history_info=1" {% if history_info_display=='1' %} class="btn btn-info" {% else %} class=" btn btn-link" {% endif %} >History Info</a>
+
+    {% if history_info_display!='1' %}
+        <form method="POST">
+          <label for="search">Search by Name or Membership Number:</label>
+          <input type="text" id="search" name="search">
+          <button type="submit">Search</button>
+        </form>
+
+      <form method="POST">
+            <p>Please sort by id or name: </p>
+            <input type="radio" id="sort_id" name="options" value="sort_id" {% if sort_by_id %} checked {% endif %} >
+          <label for="sort_id">Sort by id</label>
+          <input type="radio" id="sort_name" name="options" value="sort_name" {% if sort_by_id %}{% else %} checked {% endif %}>
+            <label for="sort_name">Sort by name</label><br>
+             <label for="inputGroupSelect">Choose the time slot you want to:</label>
+                  <select class="custom-select" id="inputGroupSelect" name = "inputGroupSelect" >
+                      <option value="all" {% if sort_time=='all' %} selected {% endif %} >All</option>
+                      <option value="week" {% if sort_time=='week' %}  selected {% endif %} >The Week</option>
+                      <option value="month" {% if sort_time=='month' %} selected {% endif %} >The Month</option>
+                  </select>
+            <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
+    {% endif %}
+  <table class="table table-striped table-hover table-fit align-middle">              
+    <thead>
+      <th scope="col">Member ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Fitness Goals</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Class_name</th>
+    </thead>
+    <tbody>
+    {% if traineelist %}
+        {% for trainee in traineelist %}
+        <tr>
+          <td>{{trainee[0]}}</td>
+          <td>{{trainee[2]}} {{trainee[3]}}</td>
+          <td>{{trainee[4]}}</td>
+          <td>{{trainee[1]}}</td>
+          <td>{{trainee[5]}}</td>
+          <td>{{trainee[6]}}</td>
+          <td>{{trainee[7]}}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+    <h2>No trainee found. Please try again.</h2>
+    {% endif %}
+  </tbody>
+  </table>
+
+</main> 
+
+<footer>
+    <p>© Copyright 2023 Fitness Club</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+
+{% endblock %}
+ 

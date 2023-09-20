@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+
+  {% if message %}
+    {{message}}
+  {% endif %}
+
+  <h1>Trainer Profile</h1>
+  <p>Welcome {{ trainer[0][0] }} {{ trainer[0][1] }}!</p>
+  <ul>
+    <li><strong>First Name:</strong> {{ trainer[0][0] }}</li>
+    <li><strong>Last Name:</strong> {{ trainer[0][1] }}</li>
+    <li><strong>Email:</strong> {{ trainer[0][2] }}</li>
+    <li><strong>Description:</strong> {{ trainer[0][3] }}</li>
+  </ul>
+  <div style= "padding:10px; text-align:center;">
+    <a href="/trainer/profile/update">
+      <button type="submit"  class="btn btn-primary">Edit Profile</button>
+    </a>
+  </div>
+  <div style= "padding:10px; text-align:center;">
+    <a href="/trainer/profile/changepassword">
+      <button type="submit"  class="btn btn-primary">Change Password</button>
+    </a>
+  </div>
+  
+
+  
+
+</main> 
+
+<footer>
+    <p>© Copyright 2023 Fitness Club</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+
+{% endblock %}
+ 

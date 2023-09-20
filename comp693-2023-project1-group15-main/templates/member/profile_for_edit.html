@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+        
+  <h2>Editting Profile</h2>
+
+  {% set ns = namespace(fn=false) %}
+  {% set ns = namespace(fn1=false) %}
+  {% set ns = namespace(fn2=false) %}
+  {% set ns = namespace(fn3=false) %}
+  {% set ns = namespace(fn4=false) %}
+
+  {% for item in profile_Data %}
+
+  {% if true  %}
+    {% set ns.fn1=item[1] %}
+    {% set ns.fn=item[0] %}
+    {% set ns.fn2=item[2] %}
+    {% set ns.fn3=item[3] %}
+    {% set ns.fn4=item[4] %}
+  {% endif  %}
+
+  {% endfor %}
+
+  {% if changepassword != 1 %}            
+  <form class="row g-3" action="/profile/edit" method="post" onsubmit="return confirm('Are you sure you want to submit?');">
+
+      <div class="col-md-4">
+        <label for="fname" class="form-label">First Name</label>
+        <input type="text"  class="form-control" id="fname" name="fname" value="{{ns.fn}}" aria-label="First name"  readonly>
+      </div>
+      <div class="col-md-4">
+        <label for="lname" class="form-label">Last Name</label>
+        <input type="text" class="form-control"  id="lname" name="lname" value="{{ns.fn1}}"  aria-label="Last name" readonly>
+      </div>
+      <!-- <div class="col-md-4">
+        <label for="PW" class="form-label">Password</label>
+        <input type="text"  class="form-control" id="PW" name="PW" value="{{ns.fn2}}"   required>
+      </div> -->
+
+      <div class="col-md-4">
+      <label for="email" class="form-label">Email</label>
+      <input type="text"  class="form-control"   id="email" name="email" value="{{ns.fn3}}" required>
+      </div>
+
+    <div class="col-md-4">
+      <label for="FG" class="form-label">Fitness Goal</label>
+      <input type="text"  class="form-control"   id="FG" name="FG" value="{{ns.fn4}}" required>
+    </div>
+    
+                
+    <!-- <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" required>
+        <label class="form-check-label" for="gridCheck">
+          Check before you submit
+        </label>
+      </div>
+    </div>
+    -->
+  
+      <div class="class=col-12">
+      <button type="submit"   class="btn btn-primary"  id="Member_id" name="Member_id" value={{MEMBER_id}}>Submit</button>
+      </div>    
+  </form>
+  {% else %}
+  <h1>Change Password</h1>
+    <form method="post" action='/profile/edit/password' onsubmit="return confirm('Are you sure you want to submit?')">
+      <div class="form-group">
+        <label for="name">Old Password:</label>
+        <input type="password" class="form-control" name="oldpass" id="oldpass" value="{{ns.fn2}}" required>
+        <button type="button" id="toggle-password1" class="btn btn-default"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="form-group">
+        <label for="name">New Password:</label>
+        <input type="password" class="form-control" name="newpass" id="newpass" required>
+        <button type="button" id="toggle-password2" class="btn btn-default"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="form-group">
+        <label for="name">Confirm New Password:</label>
+        <input type="password" class="form-control" name="newpass2" id="newpass2" required>
+        <button type="button" id="toggle-password3" class="btn btn-default"><i class="fa fa-eye"></i></button>
+      </div>
+
+      <button type="submit" class="btn btn-primary" onclick="return checkPasswords()">Update Password</button>
+    </form>
+  {% endif %}
+
+</main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+        <script>
+          function checkPasswords() {
+            var password = document.getElementsByName("newpass")[0].value;
+            var confirm_password = document.getElementsByName("newpass2")[0].value;
+    
+            if (password != confirm_password) {
+              alert('Passwords do not match.');
+              return false;
+            }
+    
+            return true;
+          }
+    
+          // Select the password fields and eye buttons using their IDs
+          const password1Field = document.querySelector("#oldpass");
+          const password2Field = document.querySelector("#newpass");
+          const password3Field = document.querySelector("#newpass2");
+          const togglePassword1Button = document.querySelector("#toggle-password1");
+          const togglePassword2Button = document.querySelector("#toggle-password2");
+          const togglePassword3Button = document.querySelector("#toggle-password3");
+    
+          // Add event listeners to the eye buttons
+          togglePassword1Button.addEventListener("click", function() {
+            togglePasswordVisibility(password1Field, togglePassword1Button);
+          });
+    
+          togglePassword2Button.addEventListener("click", function() {
+            togglePasswordVisibility(password2Field, togglePassword2Button);
+          });
+    
+          togglePassword3Button.addEventListener("click", function() {
+            togglePasswordVisibility(password3Field, togglePassword3Button);
+          });
+    
+          // Define a function to toggle password visibility
+          function togglePasswordVisibility(passwordField, togglePasswordButton) {
+            if (passwordField.type === "password") {
+              passwordField.type = "text";
+              togglePasswordButton.innerHTML = '<i class="fa fa-eye-slash"></i>';
+            } else {
+              passwordField.type = "password";
+              togglePasswordButton.innerHTML = '<i class="fa fa-eye"></i>';
+            }
+          }
+          
+        </script>
+    
+
+{% endblock %}

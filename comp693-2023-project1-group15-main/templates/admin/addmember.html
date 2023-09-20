@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+{% for message in messages %}
+  <li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<main>
+    <h1>ADDING NEW MEMBER</h1>
+
+    <!-- Need to add routing here for it to post to app.py -->
+    <!--  <form method="POST" action="/admin/addmember"> need to change the action part -->
+    <form method="POST" action="/admin/addmember" onsubmit="return confirm('Are you sure you want to submit?');">
+        <div class="form-group">
+          <label for="firstname">First Name *</label>
+          <input type="text" class="form-control" id="firstname" aria-describedby="firstname" placeholder="Enter First Name" name="firstname" required>  
+        </div>
+        <div class="form-group">
+          <label for="firstname">Last Name *</label>
+          <input type="text" class="form-control" id="last name" placeholder="Enter Last Name" name="lastname" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Email address *</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Temporary Password *</label>
+          <input type="text" class="form-control" id="password" placeholder="name@example.com" name="password" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Fitness Goals</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Please enter your desired fitness goals." name="fitnessgoals" ></textarea>
+        </div>
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+          <label class="form-check-label" for="exampleCheck1">* I agree that I have checked the information given above.</label>
+        </div> -->
+        
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      
+
+        
+      </form>
+
+</main>
+
+
+<footer>
+    <p>© Copyright 2023 Fitness Club</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+
+
+    {% include 'navbar.html' %}
+
+
+{% endif %}
+
+
+    <main>
+<!--    The following will only be displayed if the role is a member-->
+        {% if user_role == '1'%}
+            {% include 'member/banner.html'%}
+            {% include 'member/member_index.html' %}
+            
+            <h2 class="panel-body">Recent News List</h2>
+            {% for news in news_list %}
+                <div class="container">
+                    <div class="panel-group">
+                        <div class="panel panel-default"style="width:70%;">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse{{news[0]}}">{{news[1]}}</a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{news[0]}}" class="panel-collapse collapse">
+                                <p class="panel-body">{{news[2]}}</p>
+                                <div class="panel-footer">Release Date: {{news[4]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        {% else %}
+             <div>
+                <h2>This is Main Part</h2>
+                <h5>user id = {{user_id}} </h5>
+                <h5>user name = {{user_name}} </h5>
+                <h5>user role = {{ user_role }} </h5>
+             </div>
+        {% endif %}
+
+    </main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+{% endblock %}
+
+
+<script>
+function myFunction() {
+    alert("You have checked in successfully!");
+}
+
+</script>

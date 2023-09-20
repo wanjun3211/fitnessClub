@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user_id %}
+        {% include 'navbar.html' %}
+    {% endif %}
+
+    <main>
+        <h1>Payment</h1>
+        <form method="post" action="{{ url_for('app_member.payment', user_id=user_id) }}">
+            <label for="amount">Amount:</label>
+            <input type="text" name="amount" id="amount" value ='{{amount}}'required>
+
+            <label for="card_number">Card Number:</label>
+            <input type="text" name="card_number" id="card_number" minlength="16" maxlength="16" required>
+
+            <label for="card_expiry">Card Expiry:</label>
+            <input type="date" name="card_expiry" id="card_expiry" pattern="\d{4}-\d{2}-\d{2}" required>
+
+            <label for="card_cvc">Card CVC:</label>
+            <input type="text" name="card_cvc" id="card_cvc" minlength="3" maxlength="3" required>
+
+            <div>
+                {% if auto_pay == 1 %}
+                    <input type="checkbox" name="payment_type" value="Auto_Pay_SEL" id="auto_pay" checked>
+                {% else %}
+                    <input type="checkbox" name="payment_type" value="Auto_Pay_SEL" id="auto_pay">
+                {% endif %}
+                <label for="auto_pay">Set auto pay</label>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+{% endblock %}
+
+{% if amount %}
+<script>
+    let subAmount = "{{ amount }}"; // Pass Jinja variable to JavaScript
+    
+    // Check if variable has a value
+    if (subAmount) {
+      // Concatenate variable with input value
+      document.getElementById("amount").value = subAmount;
+    } else {
+      // Leave input value blank
+      document.getElementById("amount").value = "";
+    }
+</script>
+{% endif %}

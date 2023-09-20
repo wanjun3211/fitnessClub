@@ -1,0 +1,77 @@
+
+
+
+
+<div class="nav-header">
+        <div class="nav-horizontal navbar navbar-inverse">
+            <p class="nav-text">Welcome to Fitness Club System</p>
+            <div class="info">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" style="background-color:transparent;border:none;"
+                        data-toggle="dropdown"><i class="fa-solid fa-circle-user"></i>{{user_name}}
+                         <span class="caret" ></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        {% if user_role == '0' %}
+                            <li><a href="#"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+                        {% elif user_role == '1' %}
+                            <li><a href="/member/profile?memberid={{user_id}}"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+                        {% elif user_role == '2' %}
+                            <li><a href="/trainer/profile"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+                        {% endif %}
+                        <li><a href="#"><i class="fa-solid fa-gear"></i>Setting</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="nav-vertical navbar navbar-inverse">
+            <div class="ver-image">
+                <i class="fa-regular fa-circle-user"></i>
+                <div class="admin">
+                    <p class="admin-name">{{user_name}}</p>
+                    <p class="admin-role">
+                        {% if user_role == '0' %}
+                            Admin
+                        {% elif user_role == '1' %}
+                            Member
+                        {% elif user_role == '2' %}
+                            Trainer
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% if user_role == '0' %}
+                <ul class="nav navbar-nav">
+                    <li><a href="/" class="nav-active"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a></li>
+                    <li><a href="/admin/members"><i class="fa-solid fa-user"></i><span>Members</span></a></li>
+                    <li><a href="/admin/trainers_information"><i class="fa-solid fa-user"></i><span>Trainer class</span></a></li>
+                    <li><a href="/admin/attendance"><i class="fa-solid fa-clipboard-user"></i><span>Attendance</span></a></li>
+                    <!-- <li><a href="/admin/subscription"><i class="fa-solid fa-file-invoice"></i><span>Subscription</span></a></li> -->
+                    <li><a href="/admin/classes"><i class="fa-solid fa-person-shelter"></i><span>Classes</span></a></li>
+                    <li><a href="/admin/popular_classes"><i class="fa-regular fa-face-smile"></i><span>Popular Classes</span></a></li>
+                    <li><a href="/admin/financial_report"><i class="fa-solid fa-chart-pie"></i><span>Financial Report</span></a></li>
+                    <li><a href="/admin/reminder"><i class="fa-solid fa-bell"></i><span>Reminder</span></a></li>
+                    <li><a href="/admin/news"><i class="fa-solid fa-radio"></i><span>News</span></a></li>
+                    <li><a href="/admin/payment"><i class="fa-solid fa-money-bill-wave"></i><span>Process Payments</span></a></li>
+
+                </ul>
+            {% elif user_role == '1' %}
+                <ul class="nav navbar-nav">
+                    <li><a href="/" class="nav-active"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a></li>
+                    <li><a href="/member/class?memberid={{user_id}}"><i class="fa-solid fa-binoculars"></i><span>View class</span></a></li>
+                    <li><a href="/member/profile?memberid={{user_id}}"><i class="fa-solid fa-clipboard"></i>View profile</span></a></li>
+                    <li><a href="/member/special_training?memberid={{user_id}}"><i class="fa-solid fa-gift"></i><span>Book Special Training</span></a></li>
+                    <li><a href="/member/bookclass"><i class="fa-solid fa-calendar-days"></i><span>Book A Class</span></a></li>
+                    <li><a href="/member/payment?user_id={{user_id}}"><i class="fa-solid fa-bag-shopping"></i><span>Make A Payment</span></a></li>
+
+                </ul>
+            {% elif user_role == '2' %}
+                <ul class="nav navbar-nav">
+                    <li><a href="/trainer/profile" class="nav-active"><i class="fa-solid fa-gauge"></i><span>Profile</span></a></li>
+                    <li><a href="/trainer/viewtrainee"><i class="fa-solid fa-binoculars"></i><span>Trainee's info</span></a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color:transparent;">
+                <li class="breadcrumb-item" ><a href="/admin/news">Create News</a></li>
+                <li class="breadcrumb-item active" aria-current="page" >News History</li>
+            </ol>
+        </nav>
+        <h2>News History</h2>
+        <div class="table-responsive">
+        <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+
+                {% for news in news_entries %}
+                <tbody>
+                    {% for new in news %}
+                        <td>{{new}}</td>
+                    {% endfor %}
+                </tbody>
+                {% endfor %}
+
+        </table>
+            </div>
+
+
+    </main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+{% endblock %}
+

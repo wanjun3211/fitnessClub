@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+{% include 'navbar.html' %}
+{% endif %}
+
+
+<main>
+    <div>
+        <div class="d-flex justify-content-around">
+            <div>
+            <h2>Exercise Class Schedule</h2>
+                </div>
+            <div>
+                <form method="POST">
+                    <label for="inputGroupSelect">Choose A Week Your Want:</label>
+                    <select class="custom-select" id="inputGroupSelect" name = "inputGroupSelect" >
+                        <option value="week" {% if sort_by=='week' %}  selected {% endif %} >The Week</option>
+                        <option value="month" {% if sort_by=='month' %} selected {% endif %} >The Month</option>
+                        <option value="quarter" {% if sort_by=='quarter' %} selected {% endif %} >The Quarter</option>
+                    </select>
+                    <input type="submit" value="Submit">
+
+                    </form>
+            </div>
+        </div>
+        {% if class_data == [] %}
+            <h4>Sorry, there is no class scheduled for this time.</h4>
+        {% else %}
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Class ID</th>
+                    <th scope="col">Class Name</th>
+                    <th scope="col">Trainer Name</th>
+                    <th scope="col">Class Room</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Available Slots</th>
+                    <th scope="col">Book</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for class_info in class_data %}
+                <tr>
+                    {% for class_item in class_info %}
+                        {% if loop.last %}
+                            <td>
+    <!--                            <a href="/member/bookclass?sort_by={{sort_by}}&class_id={{class_info[0]}}&booked={{class_item}}"-->
+                                 <button class="btn btn-primary btn-sm"  onclick="myFunction('{{sort_by}}','{{class_item}}', '{{class_info[0]}}', '{{class_info[1]}}', '{{class_info[2]}}', '{{class_info[4]}}', '{{class_info[5]}}')">
+                                     {% if class_item == 1 %}
+                                        Cancel Book
+                                     {% else %}
+                                        Book Now
+                                     {% endif %}
+                                 </button>
+                            </td>
+                        {% elif loop.index == 2 %}
+                            <!-- Hovering class name column -->
+                            <td class='has-details'>
+                                {{class_item}}
+                                <span class="details">{{class_info[7]}}</span>
+                            </td>
+                        {% elif loop.index == loop.length - 1 %}
+                            <!-- do nothing for class description column-->
+                        {% else %}
+                            <td>{{class_item}}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif %}
+    </div>
+</main>
+
+<footer>
+    <p>© Copyright 2023 Fitness Club</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script>
+function myFunction(sort_by,booked, class_id, class_name, class_trainer,date,time) {
+
+    var message = ""
+    if (booked==1){
+        message="Are you sure you want to cancel this course? " +"\n\nClass Name:" + class_name  + "\nClass Trainer: " + class_trainer + "\nDate: "+ date + "\nTime: "+time
+    }
+    else{
+        message="Please check the information for the course you want to book:" +"\n\nClass Name:" + class_name  + "\nClass Trainer: " + class_trainer + "\nDate: "+ date + "\nTime: "+time
+    }
+    if (confirm(message)) {
+        window.location.href = "/member/bookclass?sort_by=" + sort_by + "&class_id=" + class_id + "&booked=" + booked;
+    }
+}
+
+</script>
+
+<style>
+    .has-details {
+      position: relative;
+    }
+
+    .details {
+      position: absolute;
+      top: 0;
+      transform: translateY(20%) scale(0);
+      transition: transform 0.1s ease-in;
+      transform-origin: left;
+      display: inline;
+      background: white;
+      z-index: 20;
+      min-width: 100%;
+      padding: 1rem;
+      border: 1px solid black;
+    }
+
+    .has-details:hover span {
+      transform: translateY(20%) scale(1);
+    }
+</style>
+
+
+
+
+
+{% endblock %}

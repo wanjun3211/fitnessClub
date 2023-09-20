@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+  {% if changepassword != 1 %}
+  <h1>Update Trainer Profile</h1>
+ 
+  <form method="post" action="{{ url_for('app_trainer.update_profile') }}" onsubmit="return confirm('Are you sure you want to submit?')"  >
+    <div class="form-group">
+      <label for="name">First Name:</label>
+      <input type="text" class="form-control" name="firstname" id="firstnam" value="{{ trainer[0][0] }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="name">Last Name:</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" value="{{ trainer[0][1] }}" readonly>
+      </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" value="{{ trainer[0][2] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Experience:</label>
+      <input type="text" class="form-control" name="description" id="description" value="{{ trainer[0][3] }}" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+
+  </form>  
+  {% else %}
+  <h1>Change Password</h1>
+  <form method="post" action="/trainer/profile/changepassword" onsubmit="return confirm('Are you sure you want to submit?')">
+    <div class="form-group">
+      <label for="name">Old Password:</label>
+      <input type="password" class="form-control" name="oldpass" id="oldpass" value="{{ trainer[0][0] }}" required>
+      <button type="button" id="toggle-password1" class="btn btn-default"><i class="fa fa-eye"></i></button>
+    </div>
+    <div class="form-group">
+      <label for="name">New Password:</label>
+      <input type="password" class="form-control" name="newpass" id="newpass" required>
+      <button type="button" id="toggle-password2" class="btn btn-default"><i class="fa fa-eye"></i></button>
+    </div>
+    <div class="form-group">
+      <label for="name">Confirm New Password:</label>
+      <input type="password" class="form-control" name="newpass2" id="newpass2" required>
+      <button type="button" id="toggle-password3" class="btn btn-default"><i class="fa fa-eye"></i></button>
+    </div>
+
+    <button type="submit" class="btn btn-primary" onclick="return checkPasswords()">Update Password</button>
+  </form>
+
+  {% endif %}
+
+</main> 
+
+<footer>
+    <p>© Copyright 2023 Fitness Club</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+    <script>
+      function checkPasswords() {
+        var password = document.getElementsByName("newpass")[0].value;
+        var confirm_password = document.getElementsByName("newpass2")[0].value;
+
+        if (password != confirm_password) {
+          alert('Passwords do not match.');
+          return false;
+        }
+
+        return true;
+      }
+
+      // Select the password fields and eye buttons using their IDs
+      const password1Field = document.querySelector("#oldpass");
+      const password2Field = document.querySelector("#newpass");
+      const password3Field = document.querySelector("#newpass2");
+      const togglePassword1Button = document.querySelector("#toggle-password1");
+      const togglePassword2Button = document.querySelector("#toggle-password2");
+      const togglePassword3Button = document.querySelector("#toggle-password3");
+
+      // Add event listeners to the eye buttons
+      togglePassword1Button.addEventListener("click", function() {
+        togglePasswordVisibility(password1Field, togglePassword1Button);
+      });
+
+      togglePassword2Button.addEventListener("click", function() {
+        togglePasswordVisibility(password2Field, togglePassword2Button);
+      });
+
+      togglePassword3Button.addEventListener("click", function() {
+        togglePasswordVisibility(password3Field, togglePassword3Button);
+      });
+
+      // Define a function to toggle password visibility
+      function togglePasswordVisibility(passwordField, togglePasswordButton) {
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          togglePasswordButton.innerHTML = '<i class="fa fa-eye-slash"></i>';
+        } else {
+          passwordField.type = "password";
+          togglePasswordButton.innerHTML = '<i class="fa fa-eye"></i>';
+        }
+      }
+      
+    </script>
+
+{% endblock %}
+ 

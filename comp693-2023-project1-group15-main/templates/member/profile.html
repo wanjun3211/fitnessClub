@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+
+    <main>
+        <div>
+
+            {% if message %}
+                {{message}}
+            {% endif %}
+            <h2>Profile</h2>
+
+            <table class="table table-striped table-hover table-bordered">
+                <tr><th>First Name</th><th>Last Name</th><th>Password</th><th>Date</th><th>Fitness Goals</th><th>Subscription Expire Date</th></tr>
+                
+                {% for item in profile_Data %}
+                    <tr>
+                        {% for entry in item %}
+                        <td>{{entry}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                
+            </table>
+
+            <div style= "padding:10px; text-align:center;">
+                <form class="row g-3" action="/edit/profile" method="post">
+                    <button type="submit"   class="btn btn-primary"  id="Member_id" name="Member_id" value={{MEMBER_id}}>Edit Profile</button>
+                </form>
+            </div>
+            
+
+            <div style= "padding:10px; text-align:center;">
+                <a href="/profile/edit/password">
+                    <button type="submit"   class="btn btn-primary">Change Password</button>
+                </a>
+            </div>
+            
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+{% endblock %}

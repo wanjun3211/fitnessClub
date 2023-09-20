@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user_id %}
+        {% include 'navbar.html' %}
+    {% endif %}
+
+    <main>
+        <h2>Payment</h2>
+        <form method="post" action="/member/class/"  onsubmit="myFunction()">
+            <label for="amount">Amount:</label>
+            {% for item in special_training_Information %}
+            <input type="text" name="amount" id="amount" value={{item[2]}}  required>
+            {% endfor %}
+
+            <label for="card_number">Card Number:</label>
+            <input type="text" name="card_number" id="card_number" minlength="16" maxlength="16" required>
+
+            <label for="card_expiry">Card Expiry:</label>
+            <input type="date" name="card_expiry" id="card_expiry" pattern="\d{4}-\d{2}-\d{2}" required>
+
+            <label for="card_cvc">Card CVC:</label>
+            <input type="text" name="card_cvc" id="card_cvc" minlength="3" maxlength="3" required>
+
+            <input type="hidden" id="userID" name="userID" value={{user_Id}}>
+            {% for item in bookingId %}
+            <input type="hidden" id="bookingID" name="bookingID" value={{item[0]}}>
+            {% endfor %}
+            <input type="submit" value="Submit">
+            <input type="hidden" id="s_traing_pk" name="s_traing_pk" value={{speci_training_Pk}}>
+        </form>
+        <script>
+            function myFunction() {
+              alert("Payment is successful");
+            }
+            </script>
+    </main>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+    <main>
+        <div>
+            <h1>View Popular Classes</h1>
+        </div>
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+        <form method="POST" action="/admin/popular_classes">
+            
+            
+            <div name="filterbydaterange">
+                <label class="form-label" for="form1">Start Date </label>
+                <input type="date" name="startdate" id="startdate"/>
+            
+                <label class="form-label" for="form1">End Date</label>
+                <input type="date" name="enddate" id="enddate" />
+                
+                <button type="submit" name="filterbydatebutton">FILTER BY A DATE</button>
+            </div>
+
+        </form>
+        
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Excercise Class</th>
+                        <th scope="col">No.of Members Enrolled</th>
+                    </tr>
+                </thead>
+
+                {% for class in classlist %}
+                <tbody>
+                    {% for class_index in class %}
+                    <td>{{class_index}}</td>
+                    {% endfor %}
+                    
+                </tbody>
+
+                {% endfor %}
+            </table>
+    </main>
+
+    <footer>
+        <p>© Copyright 2023 Fitness Club</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user_id %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+<main>
+    <h1>Payment Success</h1>
+    <p>Your payment has been processed successfully.</p>
+</main>
+
+<footer>
+    <p>© 2023 Fitness Club</p>
+</footer>
+
+{% endblock %}
