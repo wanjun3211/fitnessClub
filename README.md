@@ -16,7 +16,7 @@ This is a fitness C.
 3.	each role has corresponding function, and you could access them via navigation bar
 
 ## What the web app looks like
-![Alt text](image link)
+![Alt admin](https://github.com/wanjun3211/fitnessClub/blob/main/admin%20page.PNG)
 
 
 
