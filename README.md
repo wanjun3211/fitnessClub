@@ -20,7 +20,7 @@ This is a fitness C.
 
 
 
-![Alt text](image link)
+![Member Page](https://github.com/wanjun3211/fitnessClub/blob/main/member%20page.PNG)
 
 
 
